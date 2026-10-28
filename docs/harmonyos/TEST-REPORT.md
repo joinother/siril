@@ -73,6 +73,21 @@ STACKCNT=                    5 / Stack frames
 HISTORY mean stacking with winsorized sigma clipping rejection (low=3.000 high=3.000)
 ```
 
+## In-app console (NAPI path)
+
+The ArkTS console executes commands through the same NAPI module the port
+uses.  Pressing the **帮助** quick action produced:
+
+```
+[19:04:35] > help
+[19:04:35] Running command: help
+********* LIST OF AVAILABLE COMMANDS *********
+addmax filename [-mask]
+...
+```
+
+![Command output inside the app](images/siril-ui-help.jpg)
+
 ## Automated suite
 
 `scripts/test-ohos-cli.mjs` restarts the app (clean test directory), forwards
