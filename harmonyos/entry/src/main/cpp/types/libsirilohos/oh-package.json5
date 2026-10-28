@@ -1,0 +1,6 @@
+{
+  "name": "libsirilohos.so",
+  "types": "./index.d.ts",
+  "version": "1.0.0",
+  "description": "Embedded SIRIL engine for HarmonyOS"
+}

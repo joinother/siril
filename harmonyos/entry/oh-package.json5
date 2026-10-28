@@ -1,0 +1,11 @@
+{
+  "name": "entry",
+  "version": "1.5.0",
+  "description": "SIRIL HarmonyOS entry module",
+  "main": "",
+  "author": "",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "libsirilohos.so": "file:./src/main/cpp/types/libsirilohos"
+  }
+}

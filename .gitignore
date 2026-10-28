@@ -80,3 +80,18 @@ src/registration/MPP_PSS_DIFFS.md
 jupiter_drizzle_compare.png
 jupiter_kernel_compare.png
 bayer_slanted_edge_compare.png
+
+# ---- HarmonyOS port (joinother) ----
+harmonyos/**/build/
+harmonyos/oh_modules/
+harmonyos/entry/oh_modules/
+harmonyos/.signing/
+harmonyos/entry/libs/
+harmonyos/entry/src/main/resources/rawfile/siril-data/
+harmonyos/entry/src/main/resources/rawfile/testdata/
+harmonyos/local.properties
+harmonyos/.hvigor/
+harmonyos/**/.preview/
+build-ohos/
+harmonyos/**/.cxx/
+harmonyos/**/oh_modules/

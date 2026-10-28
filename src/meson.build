@@ -452,6 +452,26 @@ siril_cli = executable('siril-cli', 'main-cli.c', win_res,
                       )
 
 ################################################################################
+# HarmonyOS bridge library
+# The headless engine and the TCP control server are packed into one shared
+# object so a HarmonyOS application (or any embedder) can drive SIRIL through
+# the regular command language without a GUI.
+
+if get_option('ohos_bridge')
+  hilog_dep = cc.find_library('hilog_ndk.z', required: false)
+  ohos_bridge_lib = shared_library('siril-ohos',
+    ['ohos/siril_ohos_bridge.c', 'ohos/siril_ohos_server.c'],
+    dependencies: [siril_dep, hilog_dep],
+    link_whole: siril_lib,
+    link_args: siril_link_arg,
+    include_directories: siril_inc_dir,
+    c_args: siril_c_flag,
+    cpp_args: siril_cpp_flag,
+    install: true,
+  )
+endif
+
+################################################################################
 # Tests
 
 subdir('tests')

@@ -1,0 +1,7 @@
+{
+  "string": [
+    { "name": "module_desc", "value": "SIRIL astronomy image processor" },
+    { "name": "EntryAbility_desc", "value": "SIRIL console" },
+    { "name": "EntryAbility_label", "value": "SIRIL" }
+  ]
+}

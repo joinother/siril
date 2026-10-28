@@ -125,3 +125,9 @@ option('legacy-x11-support',
  value : true,
  description : 'GTK4 only: build the X11 drag-and-drop fallback that works around an upstream GTK X11 bug whereby gdk_drop_read_value_async never completes. Pulls in libX11. Linux/BSD only — ignored on macOS/Windows.'
 )
+
+option('ohos_bridge',
+ type : 'boolean',
+ value : false,
+ description : 'Build the HarmonyOS bridge library: headless engine plus TCP control server (requires -Dgtk=false)'
+)

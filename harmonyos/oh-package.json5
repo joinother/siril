@@ -1,0 +1,8 @@
+{
+  "modelVersion": "26.0.0",
+  "name": "siril-harmonyos",
+  "version": "1.5.0",
+  "description": "SIRIL astronomy image processor for HarmonyOS PC",
+  "dependencies": {},
+  "devDependencies": {}
+}

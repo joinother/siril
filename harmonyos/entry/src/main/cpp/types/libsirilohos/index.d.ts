@@ -1,0 +1,10 @@
+export function initEngine(filesDir: string, workDir: string, catalogPath: string): number;
+export function version(): string;
+export function runCommand(command: string): Promise<string>;
+export function status(): string;
+export function catalog(): string;
+export function chdir(dir: string): number;
+export function startServer(bind: string, port: number, token: string): number;
+export function stopServer(): number;
+export function serverStatus(): string;
+export function shutdown(): void;
