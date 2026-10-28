@@ -74,6 +74,9 @@ package_hap() {
 
   log "building HAP"
   cd "$HARMONY_DIR"
+  if [ ! -d "$HARMONY_DIR/oh_modules" ]; then
+    "$DEVECO/tools/ohpm/bin/ohpm" install --all
+  fi
   "$HVIGOR" --mode module -p product=default -p buildMode=debug assembleHap --no-daemon
   cd "$REPO_ROOT"
 

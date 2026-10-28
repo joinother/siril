@@ -61,6 +61,22 @@ Each entry has `name`, `min_args`, `usage`, `scriptable` and `requires`
 (`SINGLE_IMAGE`, `SEQUENCE`, `FOR_RGB`, ...).  The app copies the catalog into
 its sandbox and serves it through the `catalog` operation.
 
+## Exposing the port
+
+By default the listener is created on `127.0.0.1` and reached through
+`hdc fport`.  The application also offers a **局域网暴露** switch: when enabled
+it binds `0.0.0.0`, which makes the port reachable from the local network.
+Set a token in the same row in that case — the server then rejects every
+request without a matching `"token"` field:
+
+```json
+{"id":"1","op":"status","token":"my-secret"}
+```
+
+The same behaviour is available programmatically through
+`startServer(bind, port, token)` in the NAPI module; the UI just calls it with
+`127.0.0.1` or `0.0.0.0`.
+
 ## Security
 
 * The listener is created on `127.0.0.1`; it never binds a public interface

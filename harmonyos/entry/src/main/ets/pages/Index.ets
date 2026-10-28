@@ -76,6 +76,8 @@ struct Index {
   @State private statusLine: string = '';
   @State private port: number = 4780;
   @State private serverOn: boolean = false;
+  @State private lanExposed: boolean = false;
+  @State private token: string = '';
   @State private ready: boolean = false;
   @State private busy: boolean = false;
   @State private version: string = '';
@@ -285,11 +287,17 @@ struct Index {
   }
 
   private startServer(): void {
-    const rc = startServer('127.0.0.1', this.port, '');
-    hilog.info(0x5349, 'SIRIL', 'startServer rc=%{public}d port=%{public}d', rc, this.port);
+    const bind = this.lanExposed ? '0.0.0.0' : '127.0.0.1';
+    const rc = startServer(bind, this.port, this.token);
+    hilog.info(0x5349, 'SIRIL', 'startServer rc=%{public}d bind=%{public}s port=%{public}d', rc, bind, this.port);
     if (rc === 0) {
       this.serverOn = true;
-      this.appendLog(`控制端口已监听 127.0.0.1:${this.port}（JSON 行协议，hdc fport tcp:${this.port} tcp:${this.port}）`);
+      if (this.lanExposed) {
+        const guarded = this.token.length > 0 ? '已启用令牌' : '未启用令牌';
+        this.appendLog(`控制端口已监听 ${bind}:${this.port}（局域网可访问，${guarded}）`);
+      } else {
+        this.appendLog(`控制端口已监听 ${bind}:${this.port}（JSON 行协议，hdc fport tcp:${this.port} tcp:${this.port}）`);
+      }
     } else {
       this.serverOn = false;
       this.appendLog(`控制端口启动失败，错误码 ${rc}`);
@@ -475,7 +483,35 @@ struct Index {
           })
       }
       .width('100%')
-      .padding({ left: 16, right: 16, top: 8, bottom: 14 })
+      .padding({ left: 16, right: 16, top: 8 })
+
+      Row({ space: 10 }) {
+        Text('局域网暴露')
+          .fontSize(12)
+          .fontColor('#8FA2C8')
+        Toggle({ type: ToggleType.Switch, isOn: this.lanExposed })
+          .enabled(!this.serverOn)
+          .selectedColor('#2E7DF7')
+          .onChange((value: boolean) => {
+            this.lanExposed = value;
+          })
+        TextInput({ text: this.token, placeholder: '访问令牌（可选，局域网建议设置）' })
+          .layoutWeight(1)
+          .height(34)
+          .fontSize(12)
+          .enabled(!this.serverOn)
+          .backgroundColor('#111A2D')
+          .fontColor('#E3ECFF')
+          .placeholderColor('#5B6B8C')
+          .onChange((value: string) => {
+            this.token = value;
+          })
+        Text(this.lanExposed ? '0.0.0.0' : '127.0.0.1')
+          .fontSize(11)
+          .fontColor('#5B6B8C')
+      }
+      .width('100%')
+      .padding({ left: 16, right: 16, top: 2, bottom: 14 })
     }
     .width('100%')
     .height('100%')

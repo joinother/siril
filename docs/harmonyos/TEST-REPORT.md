@@ -88,6 +88,16 @@ addmax filename [-mask]
 
 ![Command output inside the app](images/siril-ui-help.jpg)
 
+## Port exposure
+
+The console exposes the control port with two modes:
+
+* loopback (`127.0.0.1:4780`) plus `hdc fport` for host tooling — the default;
+* LAN (`0.0.0.0:4780`) through the **局域网暴露** switch, with an optional
+  access token enforced by the server.
+
+![Port controls in the app](images/siril-matebook.jpg)
+
 ## Automated suite
 
 `scripts/test-ohos-cli.mjs` restarts the app (clean test directory), forwards

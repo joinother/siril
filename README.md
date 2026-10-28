@@ -214,3 +214,22 @@ Siril supports SER v3. See [this page](https://free-astro.org/index.php/SER) for
 ## License
 
 [GPL-3.0-or-later](LICENSE.md)
+
+## HarmonyOS PC (MateBook) port
+
+This fork adds a native HarmonyOS application that embeds the headless SIRIL
+engine and exposes **all 218 commands of this build** through an in-app console,
+a TCP control port and a host CLI:
+
+```bash
+hdc fport tcp:4780 tcp:4780
+node scripts/siril-cli.mjs --status
+node scripts/siril-cli.mjs --list
+node scripts/siril-cli.mjs --command "load stacked.fit"
+```
+
+See [docs/harmonyos/README.md](docs/harmonyos/README.md) for architecture,
+[docs/harmonyos/BUILD.md](docs/harmonyos/BUILD.md) for the cross-compiled
+dependency stack and [docs/harmonyos/CLI.md](docs/harmonyos/CLI.md) for the
+protocol and CLI reference.
+
